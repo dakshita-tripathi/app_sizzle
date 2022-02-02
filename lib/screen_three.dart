@@ -27,7 +27,7 @@ class _screen_threeState extends State<screen_three> {
       gender= widget.gender;
       height=widget.height;
       weight=widget.weight;}**/
-    double bmi= (weight/height)*(1/(height*100*100));
+    double bmi= (weight/height)*(1/height)*100*100;
     return Scaffold(
       appBar: AppBar(
         title: Text('Your Results'),
