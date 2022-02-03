@@ -113,7 +113,7 @@ class _screen_twoState extends State<screen_two> {
                       return alert;
                     },);
                 }
-                else if((gender.toLowerCase()!=g1)||(gender.toLowerCase()!=g2)){
+                else if((gender.toLowerCase()!=g1)&&(gender.toLowerCase()!=g2)){
                   //print(gender);
                   Widget okButton = TextButton(
                     child: Text("OK"),
