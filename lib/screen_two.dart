@@ -15,7 +15,10 @@ class screen_two extends StatefulWidget {
 String c = "";
 
 class _screen_twoState extends State<screen_two> {
-
+  String gender="";
+  int height=0;
+  int weight=0;
+  String g1="female"; String g2="male";
   @override
 
   /**void init(){
@@ -24,121 +27,137 @@ class _screen_twoState extends State<screen_two> {
      image= widget.image;
   }**/
 
-  String gender="";
-  int height=0;
-  int weight=0;
+
   Widget build(BuildContext context) {
     String name=widget.name; int age=widget.age; File? image=widget.image;
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Enter info to calculate your BMI"),
       ),
       body: Center(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-              child: Text("Enter your gender"),
-            ),
-      Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-            child:TextField(
-              //controller: myController3,
-              onChanged: (value){
-                gender=value;
-              },
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "Your gender here(F/M)",
+        child:SingleChildScrollView(
+          reverse: true,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                child: Text("Enter your gender"),
               ),
-              keyboardType: TextInputType.text,
-            ),),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-              child: Text(
-                "Enter your height:",
-                textAlign: TextAlign.left,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-              child: TextField(
-                //controller: myController4,
-                onChanged: (value){
-                  height=int.parse(value);
-                },
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: " Your height here(in cm)",
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child:TextField(
+                  //controller: myController3,
+                  onChanged: (value){
+                    gender=value;
+                  },
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: "Your gender here(FEMALE/MALE)",
+                  ),
+                  keyboardType: TextInputType.text,
+                ),),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                child: Text(
+                  "Enter your height:",
+                  textAlign: TextAlign.left,
                 ),
-                keyboardType: TextInputType.number,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-              child: Text(
-                "Enter your weight:",
-                textAlign: TextAlign.left,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-              child: TextField(
-                //controller: myController5,
-                onChanged: (value){
-                  weight=int.parse(value);
-                },
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: " Your weight here(in kg)",
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                child: TextField(
+                  //controller: myController4,
+                  onChanged: (value){
+                    height=int.parse(value);
+                  },
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: " Your height here(in cm)",
+                  ),
+                  keyboardType: TextInputType.number,
                 ),
-                keyboardType: TextInputType.number,
               ),
-            ),
-            ElevatedButton(onPressed: (){
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                child: Text(
+                  "Enter your weight:",
+                  textAlign: TextAlign.left,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                child: TextField(
+                  //controller: myController5,
+                  onChanged: (value){
+                    weight=int.parse(value);
+                  },
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: " Your weight here(in kg)",
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+              ),
+              ElevatedButton(onPressed: (){
 
-               if(gender==null){
-                Widget okButton = TextButton(
-                  child: Text("OK"),
-                  onPressed: () { },
-                );
-                AlertDialog alert =AlertDialog(content: Text('please enter your gender '),actions: [okButton ]);
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return alert;
-                  },);
-              }
-              else if(height==0){
-                Widget okButton = TextButton(
-                  child: Text("OK"),
-                  onPressed: () { },
-                );
-                AlertDialog alert =AlertDialog(content: Text('height cannot be 0'),actions: [okButton ]);
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return alert;
-                  },);
-              }
-              else if(weight==0){
-                Widget okButton = TextButton(
-                  child: Text("OK"),
-                  onPressed: () { },
-                );
-                AlertDialog alert =AlertDialog(content: Text(' weight cannot be 0'),actions: [okButton ]);
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return alert;
-                  },);
-              }
-              else{
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>screen_three(name, age, image,gender, height, weight )),);}
-            },
-              child: Text("See your results"),),
-          ],
+                if(gender==null){
+                  Widget okButton = TextButton(
+                    child: Text("OK"),
+                    onPressed: () {Navigator.of(context).pop(); },
+                  );
+                  AlertDialog alert =AlertDialog(content: Text('please enter your gender '),actions: [okButton ]);
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return alert;
+                    },);
+                }
+                else if((gender.toLowerCase()!=g1)||(gender.toLowerCase()!=g2)){
+                  //print(gender);
+                  Widget okButton = TextButton(
+                    child: Text("OK"),
+                    onPressed: () {Navigator.of(context).pop(); },
+                  );
+                  AlertDialog alert =AlertDialog(content: Text('please enter valid gender i.e., FEMALE/MALE'),actions: [okButton ]);
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return alert;
+                    },);
+                }
+                else if(height==0){
+                  Widget okButton = TextButton(
+                    child: Text("OK"),
+                    onPressed: () { Navigator.of(context).pop();},
+                  );
+                  AlertDialog alert =AlertDialog(content: Text('height cannot be 0'),actions: [okButton ]);
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return alert;
+                    },);
+                }
+                else if(weight==0){
+                  Widget okButton = TextButton(
+                    child: Text("OK"),
+                    onPressed: () { Navigator.of(context).pop();},
+                  );
+                  AlertDialog alert =AlertDialog(content: Text(' weight cannot be 0'),actions: [okButton ]);
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return alert;
+                    },);
+                }
+                else{
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>screen_three(name, age, image,gender, height, weight )),);}
+              },
+                child: Text("See your results"),),
+            ],
+          ),
         ),
+
       ),
     );
   }
